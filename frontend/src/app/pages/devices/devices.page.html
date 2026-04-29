@@ -1,0 +1,56 @@
+<section class="page-stack">
+  <app-data-table
+    title="Microcontroladores"
+    subtitle="Controle os ESPs responsáveis pelos comandos de climatização"
+    searchPlaceholder="Busque por endereço IP..."
+    createLabel="Cadastrar"
+    emptyMessage="Nenhum microcontrolador cadastrado."
+    [columns]="columns"
+    [rows]="devices"
+    [actions]="actions"
+    [loading]="loading"
+    [error]="error"
+    [searchTerm]="search"
+    [page]="page"
+    [pageSize]="pageSize"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements"
+    (searchChange)="onSearch($event)"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (createRecord)="openCreate()"
+    (view)="openView($event)"
+    (edit)="openEdit($event)"
+    (delete)="confirmDelete($event)"
+  />
+
+  <app-entity-form-dialog
+    [open]="dialogOpen"
+    [title]="
+      dialogReadonly
+        ? 'Visualizar microcontrolador'
+        : selectedDevice
+          ? 'Editar microcontrolador'
+          : 'Cadastrar microcontrolador'
+    "
+    description="Os dados são enviados diretamente para o endpoint /esp-device."
+    submitLabel="Salvar microcontrolador"
+    [form]="form"
+    [fields]="fields"
+    [loading]="saving"
+    [readonly]="dialogReadonly"
+    [error]="dialogError"
+    (close)="closeDialog()"
+    (save)="saveDevice()"
+  />
+
+  <app-confirm-dialog
+    [open]="!!deviceToDelete"
+    title="Excluir microcontrolador"
+    [message]="'Deseja excluir o dispositivo ' + (deviceToDelete?.ipAddress ?? '') + '?'"
+    confirmLabel="Excluir"
+    [loading]="deleting"
+    (cancel)="cancelDelete()"
+    (confirm)="deleteDevice()"
+  />
+</section>

@@ -1,0 +1,56 @@
+<section class="page-stack">
+  <app-data-table
+    title="Agendamentos"
+    subtitle="Organize horários de uso por sala e curso"
+    searchPlaceholder="Busque por curso ou sala..."
+    createLabel="Cadastrar"
+    emptyMessage="Nenhum agendamento cadastrado."
+    [columns]="columns"
+    [rows]="schedules"
+    [actions]="actions"
+    [loading]="loading"
+    [error]="error"
+    [searchTerm]="search"
+    [page]="page"
+    [pageSize]="pageSize"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements"
+    (searchChange)="onSearch($event)"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (createRecord)="openCreate()"
+    (view)="openView($event)"
+    (edit)="openEdit($event)"
+    (delete)="confirmDelete($event)"
+  />
+
+  <app-entity-form-dialog
+    [open]="dialogOpen"
+    [title]="
+      dialogReadonly
+        ? 'Visualizar agendamento'
+        : selectedSchedule
+          ? 'Editar agendamento'
+          : 'Cadastrar agendamento'
+    "
+    description="Os dados são enviados diretamente para o endpoint /class-schedule."
+    submitLabel="Salvar agendamento"
+    [form]="form"
+    [fields]="fields"
+    [loading]="saving"
+    [readonly]="dialogReadonly"
+    [error]="dialogError"
+    (close)="closeDialog()"
+    (save)="saveSchedule()"
+  />
+
+  <app-confirm-dialog
+    [open]="!!scheduleToDelete"
+    title="Excluir agendamento"
+    [message]="'Deseja excluir o agendamento de ' + (scheduleToDelete?.course ?? 'curso') + '?'"
+    confirmLabel="Excluir"
+    [loading]="deleting"
+    (cancel)="cancelDelete()"
+    (confirm)="deleteSchedule()"
+  />
+</section>

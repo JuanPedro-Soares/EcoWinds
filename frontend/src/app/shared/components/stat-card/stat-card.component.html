@@ -1,0 +1,11 @@
+<article class="stat-card">
+  <div>
+    <span>{{ label }}</span>
+    @if (loading) {
+      <strong class="stat-skeleton"></strong>
+    } @else {
+      <strong>{{ value }}</strong>
+    }
+  </div>
+  <i [class]="icon" aria-hidden="true"></i>
+</article>

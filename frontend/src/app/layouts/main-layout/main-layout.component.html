@@ -1,0 +1,48 @@
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Navegação principal">
+    <a class="brand" routerLink="/dashboard" aria-label="EcoWinds Dashboard">
+      <span class="brand__mark">
+        <span></span>
+      </span>
+      <strong>EcoWinds</strong>
+    </a>
+
+    <nav>
+      @for (item of navItems; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+          [attr.aria-label]="item.label"
+          [title]="item.label"
+        >
+          <i [class]="item.icon" aria-hidden="true"></i>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <section class="workspace">
+    <header class="topbar">
+      <div class="route-pill">
+        <i [class]="activeItem().icon" aria-hidden="true"></i>
+        <span>{{ activeItem().label }}</span>
+      </div>
+
+      <div class="topbar__actions">
+        <div class="user-pill">
+          <i class="pi pi-user" aria-hidden="true"></i>
+          <span>Olá, {{ userName() }}!</span>
+        </div>
+        <button type="button" class="logout-button" aria-label="Sair" title="Sair" (click)="logout()">
+          <i class="pi pi-sign-out" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <router-outlet />
+    </main>
+  </section>
+</div>

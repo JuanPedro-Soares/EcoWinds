@@ -1,59 +1,56 @@
-# Frontend
+# EcoWinds Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Aplicação Angular standalone para administrar salas, microcontroladores ESP, agendamentos e logs do backend EcoWinds.
 
-## Development server
+## Stack
 
-To start a local development server, run:
+- Angular 19
+- TypeScript strict
+- Reactive Forms
+- HttpClient com interceptors JWT e tratamento global de erros
+- PrimeIcons para iconografia
 
-```bash
-ng serve
+## Configuração
+
+A URL da API fica em `src/environments/environment.ts`.
+
+```ts
+apiBaseUrl: 'http://localhost:8080'
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O backend atual expõe:
 
-## Code scaffolding
+- `POST /auth/login`
+- `POST /auth/register`
+- `GET /room/search`, `POST /room`, `PUT /room/{id}`, `DELETE /room/{id}`
+- `GET /esp-device/search`, `POST /esp-device`, `PUT /esp-device/{id}`, `DELETE /esp-device/{id}`
+- `GET /class-schedule/search`, `POST /class-schedule`, `PUT /class-schedule/{id}`, `DELETE /class-schedule/{id}`
+- `GET /audit-log/search`, `POST /audit-log`, `PUT /audit-log/{id}`, `DELETE /audit-log/{id}`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Execução
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Requisito de ambiente: Node.js `18.19+`, compatível com Angular CLI 19.
 
 ```bash
-ng build
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Acesse `http://localhost:4200`.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Build
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+## Arquitetura
 
-For end-to-end (e2e) testing, run:
+- `core`: autenticação, guards, interceptors, storage e modelos globais.
+- `services`: integração HTTP por recurso.
+- `models`: interfaces TypeScript das entidades do backend.
+- `layouts`: layout interno com sidebar e topbar.
+- `pages`: login, dashboard e CRUDs.
+- `shared`: tabela, modal de formulário, confirmação, toast e cards reutilizáveis.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+O token JWT é mantido em `sessionStorage` e enviado via interceptor para chamadas protegidas.

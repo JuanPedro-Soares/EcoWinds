@@ -1,0 +1,110 @@
+@if (open) {
+  <div class="dialog-backdrop" role="presentation">
+    <section class="dialog-card" role="dialog" aria-modal="true" [attr.aria-label]="title">
+      <header class="dialog-card__header">
+        <div>
+          <h2>{{ title }}</h2>
+          @if (description) {
+            <p>{{ description }}</p>
+          }
+        </div>
+        <button type="button" class="icon-close" aria-label="Fechar" (click)="close.emit()">
+          <i class="pi pi-times" aria-hidden="true"></i>
+        </button>
+      </header>
+
+      @if (error) {
+        <div class="dialog-alert">
+          <i class="pi pi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ error }}</span>
+        </div>
+      }
+
+      <form class="entity-form" [formGroup]="form" (ngSubmit)="save.emit()">
+        <div class="entity-form__grid">
+          @for (field of fields; track field.key) {
+            <div class="field" [class.field--full]="field.full" [class.field--checkbox]="field.type === 'checkbox'">
+              @if (field.type === 'checkbox') {
+                <label class="checkbox-field">
+                  <input type="checkbox" [formControlName]="field.key" />
+                  <span>{{ field.label }}</span>
+                </label>
+              } @else {
+                <label [for]="field.key">{{ field.label }}</label>
+
+                @switch (field.type) {
+                  @case ('select') {
+                    <select [id]="field.key" [formControlName]="field.key">
+                      <option [ngValue]="null">
+                        {{ field.required ? 'Selecione uma opção' : 'Sem vínculo' }}
+                      </option>
+                      @for (option of field.options ?? []; track option.value) {
+                        <option [ngValue]="option.value">{{ option.label }}</option>
+                      }
+                    </select>
+                  }
+                  @case ('number') {
+                    <input
+                      [id]="field.key"
+                      type="number"
+                      [formControlName]="field.key"
+                      [placeholder]="field.placeholder ?? ''"
+                      [readonly]="viewOnly"
+                    />
+                  }
+                  @case ('time') {
+                    <input
+                      [id]="field.key"
+                      type="time"
+                      [formControlName]="field.key"
+                      [readonly]="viewOnly"
+                    />
+                  }
+                  @case ('datetime-local') {
+                    <input
+                      [id]="field.key"
+                      type="datetime-local"
+                      [formControlName]="field.key"
+                      [readonly]="viewOnly"
+                    />
+                  }
+                  @default {
+                    <input
+                      [id]="field.key"
+                      type="text"
+                      [formControlName]="field.key"
+                      [placeholder]="field.placeholder ?? ''"
+                      [readonly]="viewOnly"
+                    />
+                  }
+                }
+              }
+
+              @if (field.hint) {
+                <small>{{ field.hint }}</small>
+              }
+
+              @if (fieldInvalid(field)) {
+                <small class="field-error">{{ fieldError(field) }}</small>
+              }
+            </div>
+          }
+        </div>
+
+        <footer class="dialog-card__footer">
+          <button type="button" class="secondary-button" (click)="close.emit()">
+            {{ viewOnly ? 'Fechar' : 'Cancelar' }}
+          </button>
+          @if (!viewOnly) {
+            <button type="submit" class="primary-button" [disabled]="loading || form.invalid">
+              @if (loading) {
+                <span class="button-spinner" aria-hidden="true"></span>
+              }
+              <span>{{ submitLabel }}</span>
+            </button>
+          }
+        </footer>
+      </form>
+    </section>
+  </div>
+}

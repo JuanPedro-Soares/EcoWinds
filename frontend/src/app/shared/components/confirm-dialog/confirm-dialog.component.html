@@ -1,0 +1,20 @@
+@if (open) {
+  <div class="confirm-backdrop">
+    <section class="confirm-card" role="dialog" aria-modal="true" [attr.aria-label]="title">
+      <div class="confirm-card__icon">
+        <i class="pi pi-exclamation-triangle" aria-hidden="true"></i>
+      </div>
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+
+      <footer>
+        <button type="button" class="secondary-button" [disabled]="loading" (click)="cancel.emit()">
+          Cancelar
+        </button>
+        <button type="button" class="danger-button" [disabled]="loading" (click)="confirm.emit()">
+          {{ loading ? 'Excluindo...' : confirmLabel }}
+        </button>
+      </footer>
+    </section>
+  </div>
+}

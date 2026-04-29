@@ -1,0 +1,18 @@
+@if (notification(); as message) {
+  <aside class="toast" [ngClass]="'toast--' + message.type" role="status" aria-live="polite">
+    <i
+      [class]="
+        message.type === 'success'
+          ? 'pi pi-check-circle'
+          : message.type === 'error'
+            ? 'pi pi-exclamation-circle'
+            : 'pi pi-info-circle'
+      "
+      aria-hidden="true"
+    ></i>
+    <span>{{ message.message }}</span>
+    <button type="button" aria-label="Fechar aviso" (click)="close()">
+      <i class="pi pi-times" aria-hidden="true"></i>
+    </button>
+  </aside>
+}

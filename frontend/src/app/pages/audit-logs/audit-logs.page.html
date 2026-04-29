@@ -1,0 +1,50 @@
+<section class="page-stack">
+  <app-data-table
+    title="Logs do sistema"
+    subtitle="Audite comandos, origem e vínculos com salas e ESPs"
+    searchPlaceholder="Busque por ação, origem, usuário, sala ou IP..."
+    createLabel="Cadastrar"
+    emptyMessage="Nenhum log registrado."
+    [columns]="columns"
+    [rows]="logs"
+    [actions]="actions"
+    [loading]="loading"
+    [error]="error"
+    [searchTerm]="search"
+    [page]="page"
+    [pageSize]="pageSize"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements"
+    (searchChange)="onSearch($event)"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (createRecord)="openCreate()"
+    (view)="openView($event)"
+    (edit)="openEdit($event)"
+    (delete)="confirmDelete($event)"
+  />
+
+  <app-entity-form-dialog
+    [open]="dialogOpen"
+    [title]="dialogReadonly ? 'Visualizar log' : selectedLog ? 'Editar log' : 'Cadastrar log'"
+    description="Os dados são enviados diretamente para o endpoint /audit-log."
+    submitLabel="Salvar log"
+    [form]="form"
+    [fields]="fields"
+    [loading]="saving"
+    [readonly]="dialogReadonly"
+    [error]="dialogError"
+    (close)="closeDialog()"
+    (save)="saveLog()"
+  />
+
+  <app-confirm-dialog
+    [open]="!!logToDelete"
+    title="Excluir log"
+    [message]="'Deseja excluir o log #' + (logToDelete?.id ?? '') + '?'"
+    confirmLabel="Excluir"
+    [loading]="deleting"
+    (cancel)="cancelDelete()"
+    (confirm)="deleteLog()"
+  />
+</section>

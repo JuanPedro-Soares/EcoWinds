@@ -1,0 +1,50 @@
+<section class="page-stack">
+  <app-data-table
+    title="Salas de aula"
+    subtitle="Gerencie salas, blocos e status operacional"
+    searchPlaceholder="Busque por nome ou bloco..."
+    createLabel="Cadastrar"
+    emptyMessage="Nenhuma sala cadastrada."
+    [columns]="columns"
+    [rows]="rooms"
+    [actions]="actions"
+    [loading]="loading"
+    [error]="error"
+    [searchTerm]="search"
+    [page]="page"
+    [pageSize]="pageSize"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements"
+    (searchChange)="onSearch($event)"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+    (createRecord)="openCreate()"
+    (view)="openView($event)"
+    (edit)="openEdit($event)"
+    (delete)="confirmDelete($event)"
+  />
+
+  <app-entity-form-dialog
+    [open]="dialogOpen"
+    [title]="dialogReadonly ? 'Visualizar sala' : selectedRoom ? 'Editar sala' : 'Cadastrar sala'"
+    description="Os dados são enviados diretamente para o endpoint /room."
+    submitLabel="Salvar sala"
+    [form]="form"
+    [fields]="fields"
+    [loading]="saving"
+    [readonly]="dialogReadonly"
+    [error]="dialogError"
+    (close)="closeDialog()"
+    (save)="saveRoom()"
+  />
+
+  <app-confirm-dialog
+    [open]="!!roomToDelete"
+    title="Excluir sala"
+    [message]="'Deseja excluir ' + (roomToDelete?.identification ?? 'esta sala') + '?'"
+    confirmLabel="Excluir"
+    [loading]="deleting"
+    (cancel)="cancelDelete()"
+    (confirm)="deleteRoom()"
+  />
+</section>
