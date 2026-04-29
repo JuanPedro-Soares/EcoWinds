@@ -111,7 +111,6 @@ button {
 .login-card {
   border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 32px;
-  box-shadow: 0 30px 90px rgba(23, 48, 48, 0.12);
 }
 
 .login-hero {
@@ -131,6 +130,12 @@ button {
   display: inline-flex;
   font-weight: 950;
   gap: 12px;
+  max-width: 120px;
+}
+
+.nav-icon {
+
+  max-width: 68px;
 }
 
 .login-brand__mark {
@@ -153,10 +158,10 @@ button {
 
 .login-hero h1 {
   color: var(--ink-900);
-  font-size: clamp(2.7rem, 5vw, 5.2rem);
+  font-size: clamp(1.6rem, 4vw, 4.2rem);
   letter-spacing: -0.075em;
   line-height: 0.93;
-  margin: 86px 0 20px;
+  margin: 10px 0 20px;
   max-width: 720px;
 }
 
@@ -217,7 +222,7 @@ button {
   margin: 0 0 8px;
 }
 
-.login-card > p {
+.login-card>p {
   color: var(--ink-500);
   font-weight: 700;
   line-height: 1.6;
@@ -249,14 +254,11 @@ button {
   gap: 12px;
   min-height: 54px;
   padding: 0 15px;
-  transition:
-    border 160ms ease,
-    box-shadow 160ms ease;
+
 }
 
 .login-input:focus-within {
   border-color: var(--leaf-500);
-  box-shadow: 0 0 0 4px rgba(164, 218, 73, 0.18);
 }
 
 .login-input i {
@@ -306,13 +308,10 @@ button {
   justify-content: center;
   min-height: 54px;
   margin-top: 4px;
-  transition:
-    box-shadow 160ms ease,
-    transform 160ms ease;
+
 }
 
 .login-submit:hover:not(:disabled) {
-  box-shadow: 0 16px 30px rgba(107, 181, 71, 0.26);
   transform: translateY(-1px);
 }
 
@@ -372,12 +371,7 @@ button {
   }
 }
 
-@keyframes pageIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
+
 
 @media (max-width: 1050px) {
   .login-shell {
@@ -390,6 +384,7 @@ button {
 }
 
 @media (max-width: 820px) {
+
   .stats-grid,
   .hero-panel {
     grid-template-columns: 1fr;

@@ -6,7 +6,6 @@
   border-left: 5px solid var(--leaf-500);
   border-radius: 18px;
   bottom: 24px;
-  box-shadow: 0 18px 46px rgba(23, 48, 48, 0.18);
   color: var(--ink-800);
   display: flex;
   font-weight: 800;
@@ -30,16 +29,16 @@
   border-left-color: var(--sky-400);
 }
 
-.toast > i {
+.toast>i {
   color: var(--leaf-600);
   font-size: 1.1rem;
 }
 
-.toast--error > i {
+.toast--error>i {
   color: #d95042;
 }
 
-.toast--info > i {
+.toast--info>i {
   color: var(--sky-500);
 }
 
@@ -51,12 +50,7 @@ button {
   margin-left: auto;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
+
 
 @media (max-width: 620px) {
   .toast {

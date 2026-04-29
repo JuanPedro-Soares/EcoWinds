@@ -2,30 +2,18 @@
   <section class="login-shell">
     <article class="login-hero">
       <div class="login-brand">
-        <span class="login-brand__mark" aria-hidden="true"></span>
-        <span>EcoWinds</span>
+        <img class="login-brand" src="eco-logo.png">
       </div>
 
-      <h1>Climatização inteligente para ambientes eficientes.</h1>
-      <p>
-        Controle microcontroladores, salas, agendamentos e registros de auditoria em uma
-        interface única, responsiva e conectada ao backend do sistema.
-      </p>
-
-      <div class="hero-panel" aria-label="Destaques do sistema">
-        <div>
-          <span>Arquitetura</span>
-          <strong>JWT + API</strong>
-        </div>
-        <div>
-          <span>Operação</span>
-          <strong>Tempo real</strong>
-        </div>
-        <div>
-          <span>Foco</span>
-          <strong>Eficiência</strong>
-        </div>
+      <div style="margin-top: 90px;">
+        <h1>Climatização inteligente para ambientes eficientes.</h1>
+        <p>
+          Controle microcontroladores, salas, agendamentos e registros de auditoria em uma
+          interface única, responsiva e conectada ao backend do sistema.
+        </p>
       </div>
+
+
     </article>
 
     <article class="login-card">
@@ -37,16 +25,11 @@
           <label for="email">E-mail ou usuário</label>
           <div class="login-input">
             <i class="pi pi-envelope" aria-hidden="true"></i>
-            <input
-              id="email"
-              type="email"
-              formControlName="email"
-              autocomplete="username"
-              placeholder="usuario@ecowinds.com"
-            />
+            <input id="email" type="email" formControlName="email" autocomplete="username"
+              placeholder="usuario@ecowinds.com" />
           </div>
           @if (emailInvalid()) {
-            <span class="login-error">Informe um e-mail válido.</span>
+          <span class="login-error">Informe um e-mail válido.</span>
           }
         </div>
 
@@ -54,29 +37,24 @@
           <label for="password">Senha</label>
           <div class="login-input">
             <i class="pi pi-lock" aria-hidden="true"></i>
-            <input
-              id="password"
-              type="password"
-              formControlName="password"
-              autocomplete="current-password"
-              placeholder="Sua senha"
-            />
+            <input id="password" type="password" formControlName="password" autocomplete="current-password"
+              placeholder="Sua senha" />
           </div>
           @if (passwordInvalid()) {
-            <span class="login-error">A senha é obrigatória.</span>
+          <span class="login-error">A senha é obrigatória.</span>
           }
         </div>
 
         @if (errorMessage) {
-          <div class="login-alert">
-            <i class="pi pi-exclamation-circle" aria-hidden="true"></i>
-            <span>{{ errorMessage }}</span>
-          </div>
+        <div class="login-alert">
+          <i class="pi pi-exclamation-circle" aria-hidden="true"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
         }
 
         <button class="login-submit" type="submit" [disabled]="loading">
           @if (loading) {
-            <span class="inline-spinner" aria-hidden="true"></span>
+          <span class="inline-spinner" aria-hidden="true"></span>
           }
           <span>{{ loading ? 'Entrando...' : 'Entrar' }}</span>
         </button>
@@ -87,10 +65,6 @@
         <a routerLink="/register">Registrar-se</a>
       </div>
 
-      <p class="login-footnote">
-        A autenticação usa o endpoint real <strong>/auth/login</strong>. O token JWT é mantido na
-        sessão do navegador e enviado automaticamente para as rotas internas.
-      </p>
     </article>
   </section>
 </main>

@@ -3,7 +3,6 @@
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--border);
   border-radius: 24px;
-  box-shadow: var(--shadow-soft);
   display: flex;
   justify-content: space-between;
   min-height: 132px;
@@ -44,10 +43,4 @@ i {
   border-radius: 18px;
   height: 58px;
   width: 128px;
-}
-
-@keyframes pulse {
-  to {
-    background-position: -220% 0;
-  }
 }
