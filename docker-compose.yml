@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ecowinds-db:
+    image: postgres:latest
+    container_name: postgres-ecowinds
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ecowinds_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecowinds_pg_data:/var/lib/postgresql/data
+    restart: no
+
+volumes:
+  ecowinds_pg_data:
